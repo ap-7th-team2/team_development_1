@@ -62,6 +62,7 @@ git push origin 作業ブランチ名
 * PRビューはチームから1人`LGTM`をいただくとマージ可能
 
 #### 6. マージ
+* コードレビュー後、Approveされたらマージを実行
 1. `Confirm merge`を選択し`mainブランチ`に反映
 2. `Delete branch`を選択し、ブランチを削除
 
@@ -76,6 +77,29 @@ git pull origin main
 git branch -b 作業ブランチ名
 ```
 * 再度、開発手順の**2〜7を繰り返して**開発を行う
+
+---
+
+## コードレビュー
+#### 動作確認
+* プルリクエストの内容を自分のローカル環境で動作確認する場合の手順
+1. GitHub上で`Pull requests`を選択
+2. プルリクエストIDとブランチ名を確認
+3. ターミナルにて`git fetch`コマンドを使用
+```bash
+git fetch origin pull/プルリクID/head:ブランチ名
+```
+
+#### レビュー
+* プルリクエストのレビューの手順
+1. `Pull requests`を選択
+2. プルリクエスト内の`Files changed`を選択
+3. レビューが完了したら`Finish your review`を選択
+4. `Comment`、`Approve`、`Request changes`のどれかを選択
+    * Comment：変更の提案やフィードバックを提供する。承認/非承認もしない場合は、Commentを選択しましょう。
+    * Approve：変更を承認する。この変更で問題ないと思ったら、Approveを選択しましょう。
+    * Request changes：修正が必要であることを示す。修正が必要であると思ったら、Request changeを選択しましょう。
+5. `Submit review`を選択しレビュー完了
 
 ---
 
