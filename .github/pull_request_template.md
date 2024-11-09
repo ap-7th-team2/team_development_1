@@ -3,7 +3,7 @@
 
 ## 関連Issue
 <!-- 関連するIssueの紐付けを忘れずに！ -->
-<!-- 例：close #Isuue番号 -->
+<!-- 例：close #Issue番号 -->
 
 ## PRタイプ
 <!-- Pull Requestの種類を選択 -->
@@ -35,7 +35,9 @@
 <!-- 必要な場合に記述 -->
 <!-- 例:Gem を追加したので docker-compose run web bundle install を実行してください -->
 
+## チェックリスト
 
+- [ ] Rubocopのパスの確認
 
 ## レビュワーへの注意点・相談内容・懸念点
 <!-- 任意で記述 -->
