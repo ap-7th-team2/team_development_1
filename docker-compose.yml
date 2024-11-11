@@ -26,6 +26,8 @@ services:
       DATABASE_USER: root
       DATABASE_PASSWORD: password
       DATABASE_NAME: snippet_db
+    stdin_open: true
+    tty: true
 
 volumes:
   db_data:
