@@ -1,5 +1,10 @@
 require 'mysql2'
 
+DB_HOST = ENV['DATABASE_HOST']
+DB_USER = ENV['DATABASE_USER']
+DB_PASSWORD = ENV['DATABASE_PASSWORD']
+DB_NAME = ENV['DATABASE_NAME']
+
 begin
   # MySQLサーバに接続
   client = Mysql2::Client.new(
