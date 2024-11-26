@@ -14,7 +14,7 @@ mysql -u root -p < /init.sql
 3. データの確認
 ```bash
 # コンテナ内に入り，MySQLに接続する．
-docker exec -it team_development_1-db-1 mysql -u root -p
+mysql -u root -p
 ```
 
 ```SQL
