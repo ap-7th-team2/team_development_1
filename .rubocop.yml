@@ -11,3 +11,4 @@ AllCops:
     - '**/Gemfile.lock'
     - 'db/**/*'
     - '.git/**/*'
+    - 'node_modules/**/*'
