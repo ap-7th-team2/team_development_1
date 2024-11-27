@@ -1,4 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'mysql2', '~> 0.5'
-gem 'webrick'
+
+group :development do
+  gem 'webrick'
+end
+
+group :development, :test do
+  gem 'rubocop-airbnb'
+end
