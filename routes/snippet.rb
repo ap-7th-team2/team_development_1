@@ -8,10 +8,10 @@ DB_NAME = ENV['DATABASE_NAME']
 begin
   # MySQLサーバに接続
   client = Mysql2::Client.new(
-    host: DB_HOST,   
-    username: DB_USER,          
-    password: DB_PASSWORD, 
-    database: DB_NAME    
+    host: DB_HOST,
+    username: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME
   )
 
   puts "データベースに接続しました！"

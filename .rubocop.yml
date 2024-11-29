@@ -1,0 +1,14 @@
+inherit_from:
+  - .rubocop_airbnb.yml
+
+LineLength:
+  Max: 130
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - '**/Gemfile'
+    - '**/Gemfile.lock'
+    - 'db/**/*'
+    - '.git/**/*'
+    - 'node_modules/**/*'
