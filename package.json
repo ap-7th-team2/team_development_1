@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint 'views/**/*.js'"
+    "lint": "eslint 'views/**/*.js'",
+    "format": "prettier --write 'views/**/*.{html,css,js}'",
+    "fix": "eslint --fix 'views/**/*.js' && prettier --write 'views/**/*.js'"
   },
   "repository": {
     "type": "git",
