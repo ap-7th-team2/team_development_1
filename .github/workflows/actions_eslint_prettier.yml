@@ -1,0 +1,25 @@
+name: ESLint and Prettier
+
+on:
+  push:
+    paths:
+      - 'views/**'
+
+jobs:
+  eslint_prettier:
+    name: ESLint and Prettier
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Run npm install
+        run: npm install
+      - name: Run lint
+        run: npm run lint
+      - name: Run format
+        run: npm run format
