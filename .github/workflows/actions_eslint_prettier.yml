@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'views/**'
+  pull_request:
+    paths:
+      - 'views/**'
 
 jobs:
   eslint_prettier:
