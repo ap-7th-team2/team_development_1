@@ -18,5 +18,7 @@ jobs:
         with:
           ruby-version: 3.2
           bundler-cache: true
+      - name: Clear cache
+        run: rm -rf ~/.cache/rubocop_cache
       - name: Run rubocop
-        run: bundle exec rubocop
+        run: bundle exec rubocop --parallel routes
