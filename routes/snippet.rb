@@ -29,3 +29,5 @@ ensure
   client&.close
   puts "接続を閉じました。"
 end
+
+# 動作確認
