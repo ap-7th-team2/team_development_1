@@ -22,7 +22,6 @@ begin
   results.each do |row|
     puts row
   end
-
 rescue Mysql2::Error => e
   puts "エラー: #{e.message}"
 ensure
