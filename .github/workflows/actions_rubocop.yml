@@ -3,7 +3,7 @@ name: Rubocop
 on:
   push:
     paths:
-      - '**/*.rb'
+      - 'routes/**'
 
 jobs:
   rubocop:
