@@ -7,5 +7,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rubocop-airbnb'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
 end

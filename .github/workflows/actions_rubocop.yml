@@ -1,0 +1,27 @@
+name: Rubocop
+
+on:
+  push:
+    paths:
+      - 'routes/**'
+  pull_request:
+    paths:
+      - 'routes/**'
+
+jobs:
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+      - name: Clear cache
+        run: rm -rf ~/.cache/rubocop_cache
+      - name: Run rubocop
+        run: bundle exec rubocop --parallel routes
