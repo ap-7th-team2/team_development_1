@@ -1,2 +1,37 @@
 /* スニペットの詳細ページ */
 @charset "utf-8";
+
+.container {
+  /* フレックスボックスの利用 */
+  display: flex;
+  /* 高さはビューポート100% */
+  height: 100vh;
+}
+
+.side-menu {
+  /* 左右のメニューは比率1:1 */
+  flex: 1;
+}
+
+.left-menu {
+  background: #c0ffee;
+  /* フレックスボックスの利用 */
+  display: flex;
+  justify-content: center;
+}
+
+.app-logo {
+  max-width: 150px;
+  height: auto;
+  border: 3px sandybrown solid;
+  margin-top: 20%;
+}
+
+.main-menu {
+  background: green;
+  width: 70%;
+}
+
+.right-menu {
+  background: blue;
+}
