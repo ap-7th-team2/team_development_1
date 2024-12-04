@@ -14,16 +14,22 @@
 }
 
 .left-menu {
-  background: #c0ffee;
+  background: rgb(218, 220, 220);
   /* フレックスボックスの利用 */
   display: flex;
   justify-content: center;
+  height: auto;
+}
+
+.logo-link {
+  display: inline-block;
+  height: auto;
+  width: auto;
 }
 
 .app-logo {
   max-width: 150px;
   height: auto;
-  border: 3px sandybrown solid;
   margin-top: 20%;
 }
 
@@ -31,12 +37,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: green;
+  background: rgb(218, 220, 220);
   width: 70%;
 }
 
 .snippet-title {
-  background: pink;
+  background: #fff;
   width: 97%;
   height: 4%;
   min-height: 50px;
@@ -53,14 +59,14 @@
   line-height: 4%;
   margin-top: 1%;
   padding: 1%;
-  background: yellow;
+  background: rgb(218, 220, 220);
   border-radius: 6px;
 }
 
 .tags-menu li {
   /* リスト要素を横並び */
   display: inline;
-  background: lightcoral;
+  background: rgb(162, 173, 173);
   padding: 10px 50px 10px;
 }
 
@@ -74,17 +80,20 @@
   /* 幅の50% */
   flex: 1;
   margin-right: 7px;
-  background: orange;
+  padding: 16px 24px 16px;
+  background: rgb(26, 30, 34);
+  color: #fff;
   border-radius: 6px;
 }
 .right-container {
   /* 幅の50% */
   flex: 1;
   margin-left: 7px;
-  background: purple;
+  padding: 16px 24px 16px;
+  background: #fff;
   border-radius: 6px;
 }
 
 .right-menu {
-  background: blue;
+  background: rgb(218, 220, 220);
 }
