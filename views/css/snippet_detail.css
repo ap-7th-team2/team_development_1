@@ -28,8 +28,61 @@
 }
 
 .main-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: green;
   width: 70%;
+}
+
+.snippet-title {
+  background: pink;
+  width: 97%;
+  height: 4%;
+  min-height: 50px;
+  margin-top: 1.25%;
+  border-radius: 6px;
+}
+
+.tags-menu {
+  display: flex;
+  /* 縦方法に中央揃え */
+  align-items: center;
+  width: 97%;
+  height: 4%;
+  line-height: 4%;
+  margin-top: 1%;
+  padding: 1%;
+  background: yellow;
+  border-radius: 6px;
+}
+
+.tags-menu li {
+  /* リスト要素を横並び */
+  display: inline;
+  background: lightcoral;
+  padding: 10px 50px 10px;
+}
+
+.left-right-container {
+  display: flex;
+  width: 97%;
+  height: 87%;
+  margin-top: 1%;
+}
+.left-container {
+  /* 幅の50% */
+  flex: 1;
+  margin-right: 7px;
+  background: orange;
+  border-radius: 6px;
+}
+.right-container {
+  /* 幅の50% */
+  flex: 1;
+  margin-left: 7px;
+  background: purple;
+  border-radius: 6px;
 }
 
 .right-menu {
