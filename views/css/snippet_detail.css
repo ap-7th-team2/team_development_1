@@ -41,6 +41,16 @@
   width: 70%;
 }
 
+#copy-icon {
+  width: 42px;
+  height: auto;
+}
+
+#trash-can-icon {
+  width: 42px;
+  height: auto;
+}
+
 .snippet-title {
   background: #fff;
   width: 97%;
