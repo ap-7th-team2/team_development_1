@@ -41,9 +41,18 @@
   width: 70%;
 }
 
+.icon-container {
+  /* コピーアイコンの位置固定 */
+  position: absolute;
+  top: 20px;
+  right: 10px;
+}
+
 #copy-icon {
   width: 42px;
   height: auto;
+  /* 画像の色合いに効果を加える */
+  filter: invert(1) brightness(0.9);
 }
 
 #trash-can-icon {
@@ -96,6 +105,7 @@
   background: rgb(26, 30, 34);
   color: #fff;
   border-radius: 6px;
+  position: relative;
 }
 .right-container {
   /* 幅の50% */
