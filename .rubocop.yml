@@ -45,3 +45,6 @@ Style/ClassAndModuleChildren:
 
 Style/FetchEnvVar:
   Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false

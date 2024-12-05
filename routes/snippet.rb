@@ -16,26 +16,26 @@ def get_snippets(limit, offset)
     password: DB_PASSWORD,
     database: DB_NAME
   )
-  
+
   # タグ情報も一緒に取得するJOINクエリ
   query = <<-SQL
-    SELECT 
-      s.id, 
-      s.title, 
-      s.content, 
+    SELECT#{' '}
+      s.id,#{' '}
+      s.title,#{' '}
+      s.content,#{' '}
       s.created_at,
       GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
-    FROM 
+    FROM#{' '}
       snippets s
-    LEFT JOIN 
+    LEFT JOIN#{' '}
       snippet_tags st ON s.id = st.snippet_id
-    LEFT JOIN 
+    LEFT JOIN#{' '}
       tags t ON st.tag_id = t.id
-    GROUP BY 
+    GROUP BY#{' '}
       s.id, s.title, s.content, s.created_at
     LIMIT #{limit} OFFSET #{offset};
   SQL
-  
+
   results = client.query(query)
 
   snippets = results.map do |row|
@@ -43,8 +43,8 @@ def get_snippets(limit, offset)
       id: row['id'],
       title: row['title'],
       content: row['content'],
-      tags: row['tags']&.split(', ') || [] , # タグがない場合は空配列
-      created_at: row['created_at'] 
+      tags: row['tags']&.split(', ') || [], # タグがない場合は空配列
+      created_at: row['created_at']
     }
   end
   client.close

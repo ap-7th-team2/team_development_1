@@ -5,7 +5,7 @@ const limit = 4; // 一度に表示するスニペットの数
 async function fetchSnippets(offset = 0) {
   try {
     const response = await fetch(`http://localhost:8000/get_snippets?offset=${offset}&limit=${limit}`);
-    
+
     if (response.ok) {
       const snippets = await response.json();
       displaySnippets(snippets);
@@ -21,31 +21,29 @@ async function fetchSnippets(offset = 0) {
 // スニペットをHTMLに表示
 function displaySnippets(snippets) {
   const container = document.getElementById('snippet-container');
-  snippets.forEach(snippet => {
+  snippets.forEach((snippet) => {
     const snippetDiv = document.createElement('div');
     snippetDiv.classList.add('snippet');
-    
+
     const title = document.createElement('h2');
     title.innerText = snippet.title;
-    
+
     const content = document.createElement('p');
     // 10文字で打ち切り、文字数が100を超える場合は...を追加
-    content.innerText = snippet.content.length > 100 
-      ? snippet.content.substring(0, 100) + '...' 
-      : snippet.content;
-    
+    content.innerText = snippet.content.length > 100 ? snippet.content.substring(0, 100) + '...' : snippet.content;
+
     const tagsContainer = document.createElement('div');
     tagsContainer.classList.add('snippet-tags');
-    
+
     if (snippet.tags && snippet.tags.length > 0) {
-      snippet.tags.forEach(tag => {
+      snippet.tags.forEach((tag) => {
         const tagSpan = document.createElement('span');
         tagSpan.classList.add('tag');
         tagSpan.innerText = tag;
         tagsContainer.appendChild(tagSpan);
       });
     }
-    
+
     snippetDiv.appendChild(title);
     snippetDiv.appendChild(content);
     snippetDiv.appendChild(tagsContainer);
