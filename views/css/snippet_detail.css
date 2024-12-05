@@ -49,6 +49,8 @@
 #trash-can-icon {
   width: 42px;
   height: auto;
+  position: fixed;
+  bottom: 1.25%;
 }
 
 .snippet-title {
