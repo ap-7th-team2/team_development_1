@@ -1,3 +1,247 @@
-h1 {
-  color: aqua;
+html {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  background-color: #eeeded;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* コンテンツを縦に配置 */
+}
+
+header {
+  display: flex;
+  justify-content: space-between; /* 左右の要素をスペースで分ける */
+  align-items: flex-start; /* ヘッダー内のアイテムを上揃え */
+  padding: 16px 32px;
+  gap: 16px; /* アイテム間の余白 */
+}
+
+main {
+  padding: 1px 50px;
+}
+
+#title {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#title h1 {
+  margin: 0px;
+}
+
+#filter-button button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px; /* アイコンのサイズ */
+  height: 32px; /* アイコンのサイズ */
+  background-color: transparent; /* 背景色を透明に */
+  color: #000; /* アイコンの色（黒） */
+  border: 2px solid #000; /* ボーダーの色（黒） */
+  border-radius: 8px; /* 角を丸くする */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* ボタン色の遷移 */
+  margin-right: 4px;
+}
+
+#filter-button button:hover {
+  background-color: #000; /* ホバー時の背景色（黒） */
+  color: #fff; /* ホバー時のアイコン色（白） */
+}
+
+#filter-button i {
+  font-size: 25px; /* アイコンのサイズ */
+}
+
+header input {
+  padding: 8px 8px 8px 32px; /* 左にスペースを確保してアイコンを表示 */
+  font-size: 12px;
+  height: 16px;
+  border: 1px solid #ccc;
+  flex-grow: 1; /* 横幅が自動で調整される */
+  position: relative;
+}
+
+header input::placeholder {
+  text-align: center; /* プレースホルダーのテキストを中央に配置 */
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 800px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: #999;
+  z-index: 10;
+}
+
+header input {
+  padding: 8px 8px 8px 32px; /* 左側に虫眼鏡のスペースを確保 */
+  width: 100%;
+  font-size: 12px;
+  height: 16px;
+  border: 1px solid #ccc;
+}
+
+#create-button button {
+  padding: 16px 24px;
+  font-size: 16px;
+  border-radius: 16px;
+  border: none;
+  background-color: #10a98a;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#create-button button:hover {
+  background-color: #0e7964;
+}
+
+#snippet-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px;
+}
+
+.snippet {
+  border: 1px solid #ddd;
+  padding: 24px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.snippet:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.snippet h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  color: #333;
+}
+
+.snippet p {
+  font-size: 16px;
+  color: #555;
+}
+
+.snippet-tags {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background-color: #e0e0e0;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #333;
+}
+
+button#load-more {
+  display: block;
+  margin: 24px auto;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  border: none;
+  background-color: #10a98a;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button#load-more:hover {
+  background-color: #0e7964;
+}
+
+button#load-more:active {
+  transform: scale(0.98);
+}
+
+/* メディアクエリを追加 */
+@media screen and (max-width: 768px) {
+  header {
+    display: flex;
+    flex-wrap: wrap; /* 子要素を改行可能にする */
+    align-items: center;
+    flex-direction: row;
+    padding: 16px 16px;
+  }
+
+  header > :nth-child(2){
+    order: 1; /* 表示順を1に設定（改行して下に移動） */
+    flex-basis: calc(100%);
+  }
+
+  header > :nth-child(3) {
+    order: 2; /* 表示順を1に設定（改行して下に移動） */
+    flex-basis: calc(100%); 
+    margin: 4px; /* 間隔を調整 */
+  }
+
+  header > :nth-child(1),
+  header > :nth-child(4) {
+    order: 0; /* これらを先頭に表示 */
+    flex-basis: auto; /* 自動幅 */
+  }
+
+  header > :nth-child(4) {
+    margin-top: 8px; /* 改行後のスペースを確保 */
+  }
+
+  #snippet-container {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 16px;
+  }
+
+  .snippet {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* より狭い画面用の追加調整 */
+@media screen and (max-width: 480px) {
+  header {
+    padding: 8px; /* さらに狭めたパディング */
+  }
+
+  .search-container {
+    min-width: 150px; /* さらに最小幅を調整 */
+  }
+
+  #filter-button button {
+    width: 28px;
+    height: 28px;
+  }
+
+  #create-button button {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
 }
