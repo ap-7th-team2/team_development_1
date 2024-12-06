@@ -14,25 +14,27 @@
             <h1>タイトルロゴ</h1>
           </a>
         </div>
-        <form action="" class="f-form-col">
-          <ul class="f-form-ui">
-            <li>
-              <input type="text" name="title" placeholder="タイトルを入力してください" />
-            </li>
-            <li>
-              <input type="text" name="tags" placeholder="タグを入力してください(スペース区切り)" />
-            </li>
-          </ul>
-          <div class="f-form-body">
-            <div class="f-form-text-code">
-              <textarea name="code" class="f-form-text-code" placeholder="コードを入力してください"></textarea>
-            </div>
-            <div class="f-form-text-desc">
-              <textarea name="description" class="f-form-text-desc" placeholder="説明文を入力してください"></textarea>
+        <form action="/submit" method="post" class="f-form-col">
+          <div class="f-form-col-2">
+            <ul class="f-form-ui">
+              <li>
+                <input type="text" name="title" placeholder="タイトルを入力してください" />
+              </li>
+              <li>
+                <input type="text" name="tags" placeholder="タグを入力してください(スペース区切り)" />
+              </li>
+            </ul>
+            <div class="f-form-body">
+              <div class="f-form-text-code">
+                <textarea name="code" class="f-form-text-code" placeholder="コードを入力してください"></textarea>
+              </div>
+              <div class="f-form-text-desc">
+                <textarea name="description" class="f-form-text-desc" placeholder="説明文を入力してください"></textarea>
+              </div>
             </div>
           </div>
+          <button type="submit" class="s-btn">Submit</button>
         </form>
-        <button class="s-btn">Submit</button>
       </div>
     </div>
   </body>
