@@ -36,7 +36,12 @@ li {
 }
 
 .f-form-col {
-  width: 960px;
+  display: flex;
+  width: 1150px;
+}
+
+.f-form-col-2 {
+  width: 100%;
 }
 
 .f-form-ui input {
@@ -86,6 +91,7 @@ textarea {
 
 .f-form-text-code {
   flex: 1;
+  color: #fff;
   background-color: #000;
   caret-color: #fff;
 }
