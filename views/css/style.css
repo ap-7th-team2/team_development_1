@@ -11,6 +11,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   height: 100%;
+  min-width: 60%;
   display: flex;
   flex-direction: column; /* コンテンツを縦に配置 */
 }
@@ -21,6 +22,7 @@ header {
   align-items: flex-start; /* ヘッダー内のアイテムを上揃え */
   padding: 16px 32px;
   gap: 16px; /* アイテム間の余白 */
+  min-width: 80%;
 }
 
 main {
@@ -36,6 +38,11 @@ main {
 
 #title h1 {
   margin: 0px;
+}
+
+#title h1 a{
+  color: black; /* 文字色を黒に設定 */
+  text-decoration: none; /* アンダーラインを削除 */
 }
 
 #filter-button button {
@@ -145,7 +152,7 @@ header input {
   color: #555;
 }
 
-.snippet-tags {
+.tags{
   margin-top: 12px;
   display: flex;
   flex-wrap: wrap;
@@ -160,7 +167,13 @@ header input {
   color: #333;
 }
 
-button#load-more {
+#pagination-controls {
+  display: flex;
+  justify-content: center; /* 左右の要素をスペースで分ける */
+  gap: 16px; /* アイテム間の余白 */
+}
+
+#pagination-controls form button{
   display: block;
   margin: 24px auto;
   padding: 12px 24px;
@@ -174,12 +187,28 @@ button#load-more {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button#load-more:hover {
+#pagination-controls form button:hover {
   background-color: #0e7964;
 }
 
-button#load-more:active {
+#pagination-controls form button:active {
   transform: scale(0.98);
+}
+
+#pagination-controls form button:hover:not(:disabled) {
+  background-color: #0e7964;
+}
+
+#pagination-controls form button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* 無効化状態のボタン */
+#pagination-controls form button:disabled {
+  background-color: #cccccc; /* 暗い色に設定 */
+  color: #666666; /* テキスト色も変更 */
+  cursor: not-allowed; /* 無効化を示すカーソル */
+  transform: none; /* アクティブ時の縮小を無効化 */
 }
 
 /* メディアクエリを追加 */
