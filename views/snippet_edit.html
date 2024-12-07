@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>編集ページ</title>
+    <link rel="stylesheet" href="./css/snippet_form.css" />
+  </head>
+  <body>
+    <div class="page-container">
+      <div class="f-container">
+        <div class="logo-h1">
+          <a href="/" class="logo-a">
+            <h1>タイトルロゴ</h1>
+          </a>
+        </div>
+        <form action="/update" method="post" class="f-form-col">
+          <input type="hidden" name="id" value="{%ID%}" />
+          <div class="f-form-col-2">
+            <ul class="f-form-ui">
+              <li>
+                <input type="text" name="title" value="{%TITLE%}" placeholder="タイトルを入力してください" />
+              </li>
+              <li>
+                <input type="text" name="tags" value="{%TAGS%}" placeholder="タグを入力してください(スペース区切り)" />
+              </li>
+            </ul>
+            <div class="f-form-body">
+              <div class="f-form-text-code">
+                <textarea name="code" class="f-form-text-code" placeholder="コードを入力してください">
+{%CODE%}</textarea
+                >
+              </div>
+              <div class="f-form-text-desc">
+                <textarea name="description" class="f-form-text-desc" placeholder="説明文を入力してください">
+{%DESCRIPTION%}</textarea
+                >
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="s-btn">Update</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
