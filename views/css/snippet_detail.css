@@ -55,6 +55,13 @@
   filter: invert(1) brightness(0.9);
 }
 
+#pen-icon {
+  width: 37px;
+  height: auto;
+  position: fixed;
+  top: 10%;
+}
+
 #trash-can-icon {
   width: 42px;
   height: auto;
