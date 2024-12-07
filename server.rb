@@ -18,7 +18,7 @@ def fetch_snippet_from_db(snippet_id)
 
   # スニペット情報の取得
   snippet_query = <<~SQL
-    SELECT snippets.id, snippets.title, snippets.content
+    SELECT snippets.id, snippets.title, snippets.content, snippets.description
     FROM snippets
     WHERE snippets.id = #{client.escape(snippet_id.to_s)} LIMIT 1;
   SQL
@@ -102,6 +102,7 @@ server.mount_proc "/snippets" do |req, res|
   res.body = template.result_with_hash(
     title: snippet['title'],
     content: snippet['content'],
+    description: snippet['description'],
     tags: tags
   )
 end
