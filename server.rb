@@ -14,7 +14,7 @@ server.mount_proc '/get_snippets' do |req, res|
   snippets = IndexRoute.get_snippets(limit, offset)
   snippet_html = IndexRoute.generate_snippets_html(snippets)
   res.content_type = 'text/html'
-  res.body = IndexRoute.generate_page_html(snippet_html, offset, limit, snippets, tags)
+  res.body = IndexRoute.generate_page_html(snippet_html, offset, limit, tags)
 end
 
 # `/create` エンドポイントでフォームデータを処理
