@@ -100,6 +100,7 @@ server.mount_proc "/snippets" do |req, res|
 
   # データをテンプレートに渡してHTMLを生成
   res.body = template.result_with_hash(
+    id: snippet['id'],
     title: snippet['title'],
     content: snippet['content'],
     description: snippet['description'],
