@@ -74,12 +74,16 @@
 }
 
 .snippet-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #fff;
   width: 97%;
   height: 4%;
   min-height: 50px;
   margin-top: 1.25%;
   border-radius: 6px;
+  font-size: 24px;
 }
 
 .tags-menu {
