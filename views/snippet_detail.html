@@ -8,6 +8,10 @@
   <!-- CSS -->
   <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
   <link rel="stylesheet" href="css/snippet_detail.css">
+  <!-- Google Fonts用 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
@@ -31,7 +35,8 @@
         <!-- 中央内の左側 -->
         <div class="left-container">
           <div class="snippet-body">
-            <main>string = "apple banana orange"</main>
+            <main class="code">string = "apple banana orange"<br>string.split(" ")<br>p string #=> ["apple", "banana", "orange"]
+            </main>
           </div>
           <div class="icon-container">
             <a href="#"><img id="copy-icon" src="images/copy.png" alt="コピーのアイコン"></a>
