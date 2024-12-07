@@ -4,7 +4,8 @@ CREATE TABLE snippets (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255),
     content TEXT,
-    copy_count INT DEFAULT 0, 
+    description TEXT,
+    copy_count INT DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
