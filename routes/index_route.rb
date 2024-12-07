@@ -7,9 +7,9 @@ DB_USER = ENV['DATABASE_USER']
 DB_PASSWORD = ENV['DATABASE_PASSWORD']
 DB_NAME = ENV['DATABASE_NAME']
 
-module IndexRoute
+module IndexRoute # rubocop:disable Metrics/ModuleLength
   # タグをすべて取得するメソッド
-  def self.get_tags
+  def self.obtain_tags
     client = Mysql2::Client.new(
       host: DB_HOST,
       username: DB_USER,
@@ -118,7 +118,7 @@ module IndexRoute
   end
 
   # ページHTMLを生成するメソッド
-  def self.generate_page_html(snippet_html, offset, limit, snippets, tags)
+  def self.generate_page_html(snippet_html, offset, limit, tags)
     # 次のページがあるかどうかを判定
     has_next_page = next_page?(limit, offset)
 
@@ -177,9 +177,7 @@ module IndexRoute
               <div>
                 <label>投稿日</label>
                 <button>新しい順</button>
-                <form action="/get_snippet" method="get">
-                  <button>古い順</button>
-                </form>
+                <button>古い順</button>
               </div>
             </div>
           </div>

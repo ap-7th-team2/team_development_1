@@ -1,7 +1,7 @@
 require 'webrick'
 require_relative 'routes/index_route'
 require_relative 'routes/snippet_routes'
-require_relative 'routes/snippet'
+require_relative 'routes/index_route'
 
 server = WEBrick::HTTPServer.new(Port: 8000, DocumentRoot: './views')
 server.mount('/css', WEBrick::HTTPServlet::FileHandler, './views/css')
@@ -11,7 +11,7 @@ server.mount('/js', WEBrick::HTTPServlet::FileHandler, './views/js')
 server.mount_proc '/get_snippets' do |req, res|
   offset = req.query['offset'].to_i || 0
   limit = req.query['limit'].to_i || 4
-  tags = IndexRoute.get_tags
+  tags = IndexRoute.obtain_tags
   snippets = IndexRoute.get_snippets(limit, offset)
   snippet_html = IndexRoute.generate_snippets_html(snippets)
   res.content_type = 'text/html'
