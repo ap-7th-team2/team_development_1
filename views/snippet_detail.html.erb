@@ -55,12 +55,12 @@
     <!-- 右側のメニュー -->
     <div class="side-menu right-menu">
       <a href="/edit?id=<%= id %>"><img id="pen-icon" src="/images/pen.png" alt="鉛筆のアイコン|編集リンク"></a>
-      <a href="#"><img id="trash-can-icon" src="/images/trash.png" alt="ごみ箱のアイコン|削除リンク"></a>
+      <img id="trash-can-icon" src="/images/trash.png" alt="ごみ箱のアイコン|削除リンク">
     </div>
   </div><!-- /.container -->
 
   <!-- スニペット削除のモーダルダイアログ -->
-  <div class="modal">
+  <div id="deleteModal" class="modal">
     <div class="modal-center">
       <div class="modal-dialog">
         <p>スニペットを削除しますか？</p>

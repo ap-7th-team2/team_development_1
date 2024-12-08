@@ -71,6 +71,7 @@
   height: auto;
   position: fixed;
   bottom: 1.25%;
+  cursor: pointer;
 }
 
 .snippet-title {
@@ -137,6 +138,8 @@
 
 /* モーダル */
 .modal {
+  /* デフォルトで非表示 */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
