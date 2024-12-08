@@ -10,15 +10,16 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
 
   def self.truncate_text(text, length)
     return '' if text.nil? # text が nil の場合は空文字列を返す
+
     text.length > length ? "#{text[0...length]}..." : text
   end
-  
+
   # MySQLの接続情報
   DB_HOST = ENV['DATABASE_HOST']
   DB_USER = ENV['DATABASE_USER']
   DB_PASSWORD = ENV['DATABASE_PASSWORD']
   DB_NAME = ENV['DATABASE_NAME']
-  
+
   # タグをすべて取得するメソッド
   def self.obtain_tags
     client = Mysql2::Client.new(
@@ -36,6 +37,7 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
     []
   end
 
+  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   # スニペットを取得するメソッド
   def self.get_snippets(options = {})
     client = Mysql2::Client.new(
@@ -47,7 +49,7 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
 
     # 基本のSQLクエリ
     base_query = <<-SQL
-      SELECT 
+      SELECT#{' '}
         s.id,
         s.title,
         s.description,
@@ -55,11 +57,11 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
         s.created_at,
         s.copy_count,
         GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
-      FROM 
+      FROM#{' '}
         snippets s
-      LEFT JOIN 
+      LEFT JOIN#{' '}
         snippet_tags st ON s.id = st.snippet_id
-      LEFT JOIN 
+      LEFT JOIN#{' '}
         tags t ON st.tag_id = t.id
     SQL
 
@@ -67,7 +69,6 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
     conditions = []
     params = []
 
-    
     # タグでの絞り込み
     if options[:tags] && !options[:tags].empty?
       conditions << "t.name = ?"
@@ -124,6 +125,7 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
     puts "MySQL Error: #{e.message}"
     []
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   # スニペットをHTMLに変換するメソッド
   def self.generate_snippets_html(snippets)

@@ -21,8 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 数値のみのidを正規表現でフィルタリング
   const snippetElements = document.querySelectorAll('[id]'); // IDが設定されているすべての要素を取得
 
-  snippetElements.forEach(element => {
-    if (/^\d+$/.test(element.id)) { // 数値のみであることをチェック
+  snippetElements.forEach((element) => {
+    if (/^\d+$/.test(element.id)) {
+      // 数値のみであることをチェック
       element.addEventListener('click', (event) => {
         const snippetId = event.target.id; // IDを取得
         if (snippetId) {
@@ -37,14 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const tagButtons = document.querySelectorAll('#filter-menu .tag');
   const sortButtons = document.querySelectorAll('#filter-menu button[data-sort]');
 
-  tagButtons.forEach(button => {
+  tagButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
       const selectedTag = event.target.textContent;
       window.location.href = `/get_snippets?tags=${encodeURIComponent(selectedTag)}`;
     });
   });
 
-  sortButtons.forEach(button => {
+  sortButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
       const sortBy = event.target.getAttribute('data-sort');
       window.location.href = `/get_snippets?sort_by=${encodeURIComponent(sortBy)}`;
@@ -60,26 +61,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-// クリップボードにコピーする関数
-// クリップボードにコピーする関数
-async function copyToClipboard(content, btn) {
-  try {
-    // Clipboard APIを使用してクリップボードにコピー
-    await navigator.clipboard.writeText(content);
-
-    // 「copied」メッセージを表示
-    const copiedMessage = btn.closest('.snippet').querySelector('.copied-message');
-    if (copiedMessage) {
-      copiedMessage.style.display = 'block';
-
-      // 2秒後に非表示にする
-      setTimeout(() => {
-        copiedMessage.style.display = 'none';
-      }, 2000);
-    }
-  } catch (error) {
-    console.error('Clipboard API failed:', error);
-    alert('Failed to copy!');
-  }
-}
