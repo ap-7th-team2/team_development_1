@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const yesButton = document.getElementById('deleteYes');
   const noButton = document.getElementById('deleteNo');
   // URLからidを取得
-  const snippetId = window.location.pathname.split('/').pop();
+  const snippetId = window.location.pathname.split('/snippets/').pop();
 
   // ごみ箱アイコンをクリック
   trashIcon.addEventListener('click', (e) => {
@@ -22,20 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Deleteボタン
-  yesButton.addEventListener('click', async () => {
-    try {
-      const response = await fetch(`/delete/${snippetId}`, {
-        method: 'DELETE'
-      });
+  yesButton.addEventListener('click', () => {
+    // 削除用のフォームを作成して送信
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = `/delete/${snippetId}`;
 
-      if (response.ok) {
-        window.location.href = '/?deleted=true';
-      } else {
-        alert('削除に失敗しました');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('削除に失敗しました');
-    }
+    // method-override用の隠しフィールド
+    const methodInput = document.createElement('input');
+    methodInput.type = 'hidden';
+    methodInput.name = '_method';
+    methodInput.value = 'DELETE';
+
+    form.appendChild(methodInput);
+    document.body.appendChild(form);
+    form.submit();
   });
 });

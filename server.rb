@@ -85,6 +85,49 @@ server.mount_proc '/update' do |req, res|
   end
 end
 
+# `/delete/:id` エンドポイントでスニペットを削除
+server.mount_proc '/delete' do |req, res|
+  begin
+    # POSTリクエストとmethod-overrideをチェック
+    if req.request_method == 'POST' && req.query['_method'] == 'DELETE'
+      snippet_id = req.path.split('/delete/').last
+
+      client = Mysql2::Client.new(
+        host: DB_HOST,
+        username: DB_USER,
+        password: DB_PASSWORD,
+        database: DB_NAME,
+        encoding: 'utf8'
+      )
+
+      # トランザクションを開始
+      client.query('START TRANSACTION')
+      begin
+        # スニペットとタグの関連付けを削除
+        client.query("DELETE FROM snippet_tags WHERE snippet_id = #{client.escape(snippet_id)}")
+        # スニペットを削除
+        client.query("DELETE FROM snippets WHERE id = #{client.escape(snippet_id)}")
+        client.query('COMMIT')
+      rescue StandardError => e
+        client.query('ROLLBACK')
+        raise e
+      ensure
+        client.close
+      end
+
+      # 削除成功後、トップページにリダイレクト
+      res.status = 302
+      res.header['Location'] = '/?deleted=true'
+    else
+      res.status = 405
+      res.body = 'Method not allowed'
+    end
+  rescue StandardError => e
+    res.status = 500
+    res.body = "Internal Server Error: #{e.message}"
+  end
+end
+
 # 詳細ページ用の動的ルーティング
 server.mount_proc "/snippets" do |req, res|
   # URLからスニペットIDを取得(Ex. 「/snippets/1」にアクセスすると、「1」を取得)
