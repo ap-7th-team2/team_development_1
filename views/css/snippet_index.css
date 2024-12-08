@@ -13,15 +13,15 @@ body {
   height: 100%;
   min-width: 60%;
   display: flex;
-  flex-direction: column; /* コンテンツを縦に配置 */
+  flex-direction: column; 
 }
 
 header {
   display: flex;
-  justify-content: space-between; /* 左右の要素をスペースで分ける */
-  align-items: flex-start; /* ヘッダー内のアイテムを上揃え */
+  justify-content: space-between; 
+  align-items: flex-start; 
   padding: 16px 32px;
-  gap: 16px; /* アイテム間の余白 */
+  gap: 16px;
   min-width: 80%;
 }
 
@@ -29,6 +29,7 @@ main {
   padding: 1px 50px;
 }
 
+ /* タイトルロゴ */
 #title {
   margin: 0;
   padding: 0;
@@ -41,34 +42,36 @@ main {
 }
 
 #title h1 a{
-  color: black; /* 文字色を黒に設定 */
-  text-decoration: none; /* アンダーラインを削除 */
+  color: black;
+  text-decoration: none;
 }
 
+ /* 並べ替え・絞り込みボタン */
 #filter-button button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 32px; /* アイコンのサイズ */
-  height: 32px; /* アイコンのサイズ */
-  background-color: transparent; /* 背景色を透明に */
-  color: #000; /* アイコンの色（黒） */
-  border: 2px solid #000; /* ボーダーの色（黒） */
-  border-radius: 8px; /* 角を丸くする */
+  width: 32px; 
+  height: 32px; 
+  background-color: transparent; 
+  color: #000; 
+  border: 2px solid #000; 
+  border-radius: 8px; 
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease; /* ボタン色の遷移 */
+  transition: background-color 0.3s ease, color 0.3s ease;
   margin-right: 4px;
 }
 
 #filter-button button:hover {
-  background-color: #000; /* ホバー時の背景色（黒） */
-  color: #fff; /* ホバー時のアイコン色（白） */
+  background-color: #000; 
+  color: #fff;
 }
 
 #filter-button i {
   font-size: 25px; /* アイコンのサイズ */
 }
 
+ /* 検索窓 */
 header input {
   padding: 8px 8px 8px 32px; /* 左にスペースを確保してアイコンを表示 */
   font-size: 12px;
@@ -97,14 +100,7 @@ header input::placeholder {
   z-index: 10;
 }
 
-header input {
-  padding: 8px 8px 8px 32px; /* 左側に虫眼鏡のスペースを確保 */
-  width: 100%;
-  font-size: 12px;
-  height: 16px;
-  border: 1px solid #ccc;
-}
-
+ /* 新規作成ボタン */
 #create-button button {
   padding: 16px 24px;
   font-size: 16px;
@@ -120,6 +116,7 @@ header input {
   background-color: #0e7964;
 }
 
+ /* スニペット表示欄 */
 #snippet-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -131,6 +128,7 @@ header input {
   cursor: pointer;
   border: 1px solid #ddd;
   padding: 24px;
+  height: 200px;
   background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -143,9 +141,22 @@ header input {
 
 .snippet h2 {
   margin: 0 0 12px;
-  font-size: 24px;
+  font-size: 28px; /* フォントサイズを大きく変更 */
   color: #333;
+  position: relative; /* アンダーライン用 */
 }
+
+.snippet h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px; /* アンダーラインの位置調整 */
+  width: 100%;
+  height: 4px; /* アンダーラインの太さ */
+  background-color: rgba(0, 0, 0, 0.1); /* 半透明の黒色 */
+  border-radius: 2px; /* アンダーラインの角を丸くする */
+}
+
 
 .snippet h3 {
   margin: 0 0 12px;
@@ -173,15 +184,7 @@ header input {
   color: #333;
 }
 
-/* 無効化状態のボタン */
-#pagination-controls form button:disabled {
-  background-color: #cccccc; /* 暗い色に設定 */
-  color: #666666; /* テキスト色も変更 */
-  cursor: not-allowed; /* 無効化を示すカーソル */
-  transform: none; /* アクティブ時の縮小を無効化 */
-}
-
-/* メディアクエリを追加 */
+/* レスポンシブ対応 */
 @media screen and (max-width: 768px) {
   header {
     display: flex;
@@ -245,11 +248,11 @@ header input {
   }
 }
 
+ /* 絞り込み・並べ替えメニュー */
 .hidden {
   display: none !important;
 }
 
-/* 絞り込みメニューのオーバーレイ */
 #filter-menu-overlay {
   position: fixed;
   top: 0;
@@ -263,7 +266,6 @@ header input {
   z-index: 1000;
 }
 
-/* メニュー本体 */
 #filter-menu {
   background-color: #fff;
   padding: 20px;
@@ -273,14 +275,12 @@ header input {
   font-family: Arial, sans-serif;
 }
 
-/* レスポンシブ対応: 画面幅が768px未満の場合 */
 @media (max-width: 768px) {
   #filter-menu {
     width: 80%; /* スマホなどの狭い画面では幅を90%に変更 */
   }
 }
 
-/* メニュータイトル */
 #filter-menu h3 {
   margin: 0 0 15px;
   font-size: 1.5rem;
@@ -288,12 +288,10 @@ header input {
   text-align: center;
 }
 
-/* 各セクションのスタイル */
 #filter-menu div {
   margin-bottom: 15px;
 }
 
-/* ラベル */
 #filter-menu label {
   display: block;
   font-weight: bold;
@@ -305,7 +303,6 @@ header input {
   display: inline-block;
 }
 
-/* ボタンのスタイル */
 #filter-menu button {
   background-color: #10a98a;
   color: #fff;
@@ -322,7 +319,6 @@ header input {
   background-color: #0e7964;
 }
 
-/* タグのボタン */
 #filter-menu .tag {
   background-color: #e0e0e0;
   color: #333;
@@ -330,51 +326,4 @@ header input {
 
 #filter-menu .tag:hover {
   background-color: #ababab;
-}
-
-
-#init {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-}
-
-#init header {
-  text-align: center;
-}
-
-#init-title h1 {
-  font-size: 3rem;
-  margin: 0;
-  color: #333;
-}
-
-#init-title a {
-  text-decoration: none;
-  color: inherit;
-}
-
-#init main {
-  margin-top: 20px;
-  text-align: center;
-}
-
-#init main #start button {
-  font-size: 1.5rem;
-  padding: 10px 20px;
-  background-color: #10a98a;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-#init main #start button:hover {
-  background-color: #0e7964;
 }

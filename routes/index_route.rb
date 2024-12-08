@@ -1,13 +1,23 @@
 require 'mysql2'
 require 'webrick'
-
-# MySQLの接続情報
-DB_HOST = ENV['DATABASE_HOST']
-DB_USER = ENV['DATABASE_USER']
-DB_PASSWORD = ENV['DATABASE_PASSWORD']
-DB_NAME = ENV['DATABASE_NAME']
+require 'time'
 
 module IndexRoute # rubocop:disable Metrics/ModuleLength
+  def self.format_datetime(datetime)
+    Time.parse(datetime.to_s).strftime('%Y-%m-%d %H:%M')
+  end
+
+  def self.truncate_text(text, length)
+    return '' if text.nil? # text が nil の場合は空文字列を返す
+    text.length > length ? "#{text[0...length]}..." : text
+  end
+  
+  # MySQLの接続情報
+  DB_HOST = ENV['DATABASE_HOST']
+  DB_USER = ENV['DATABASE_USER']
+  DB_PASSWORD = ENV['DATABASE_PASSWORD']
+  DB_NAME = ENV['DATABASE_NAME']
+  
   # タグをすべて取得するメソッド
   def self.obtain_tags
     client = Mysql2::Client.new(
@@ -118,11 +128,14 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
   def self.generate_snippets_html(snippets)
     snippets.map do |snippet|
       <<-HTML
-        <div class="snippet" id = "#{snippet[:id]}">
+        <div class="snippet" id="#{snippet[:id]}">
           <h2>#{snippet[:title]}</h2>
-          <h3>#{snippet[:description]}</h3>
-          <div class="tags">Tags: #{snippet[:tags].join(', ')}</div>
-          <p>Created at: #{snippet[:created_at]}</p>
+          <h3>#{truncate_text(snippet[:description], 50)}</h3>
+          <p>#{truncate_text(snippet[:content], 50)}</p>
+          <div class="tags">
+            #{snippet[:tags].map { |tag| "<span class='tag'>#{tag}</span>" }.join(' ')}
+          </div>
+          <p>Created at: #{format_datetime(snippet[:created_at])}</p>
         </div>
       HTML
     end.join("\n")
