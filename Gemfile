@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'mysql2', '~> 0.5'
 
+gem "erb"
+
 group :development do
   gem 'webrick'
 end

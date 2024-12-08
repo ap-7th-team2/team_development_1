@@ -1,0 +1,82 @@
+<!-- スニペットの詳細ページ -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>snippet_detail</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="/css/snippet_detail.css">
+  <!-- Google Fonts用 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- 左側のメニュー -->
+    <div class="side-menu left-menu">
+      <div class="logo-container">
+        <a class="logo-link" href="/"><img class="app-logo" src="/images/snippet-app-logo.png" alt="スニペットアプリのロゴ"></a>
+      </div>
+    </div>
+    <!-- 中央のメニュー -->
+    <div class="main-menu">
+      <div class="snippet-title"><%= title %></div>
+      <div class="tags-menu">
+        <ul class="tags">
+          <% tags.each do |tag| %>
+            <li><%= tag %></li>
+          <% end %>
+        </ul>
+      </div>
+      <!-- 中央内の左右を分割 -->
+      <div class="left-right-container">
+        <!-- 中央内の左側 -->
+        <div class="left-container">
+          <!-- コピーの通知(普段は非表示) -->
+          <div class="copied">
+            コピーしました！
+          </div>
+          <div class="snippet-body">
+            <main class="code">
+              <%= content %>
+            </main>
+          </div>
+          <div class="icon-container">
+            <img id="copy-icon" src="/images/copy.png" alt="コピーのアイコン">
+          </div>
+        </div>
+        <!-- 中央内の右側 -->
+        <div class="right-container">
+          <div class="snippet-description">
+            <%= description %>
+          </div>
+        </div>
+      </div><!-- /.left-right-container -->
+    </div><!-- /.main-menu -->
+    <!-- 右側のメニュー -->
+    <div class="side-menu right-menu">
+      <a href="/edit?id=<%= id %>"><img id="pen-icon" src="/images/pen.png" alt="鉛筆のアイコン|編集リンク"></a>
+      <img id="trash-can-icon" src="/images/trash.png" alt="ごみ箱のアイコン|削除リンク">
+    </div>
+  </div><!-- /.container -->
+
+  <!-- スニペット削除のモーダルダイアログ -->
+  <div id="deleteModal" class="modal">
+    <div class="modal-center">
+      <div class="modal-dialog">
+        <p>スニペットを削除しますか？</p>
+        <div class="modal-buttons">
+          <button id="deleteNo">Cancel</button>
+          <button id="deleteYes">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- /.modal -->
+
+  <!-- JavaScript読み込み -->
+  <script src="/js/snippet_detail.js"></script>
+</body>
+</html>

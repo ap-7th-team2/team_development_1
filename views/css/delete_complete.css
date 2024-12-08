@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+body {
+  background: #eeeded;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.complete-message {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.complete-message a {
+  text-decoration: none;
+  background: #10a98a;
+  border-radius: 12px;
+  padding: 12px 24px;
+  color: #fff;
+  margin-top: 10%;
+  text-align: center;
+}

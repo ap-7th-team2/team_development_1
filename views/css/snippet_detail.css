@@ -1,0 +1,215 @@
+/* スニペットの詳細ページ */
+@charset "utf-8";
+
+.container {
+  /* フレックスボックスの利用 */
+  display: flex;
+  /* 高さはビューポート100% */
+  height: 100vh;
+}
+
+.side-menu {
+  /* 左右のメニューは比率1:1 */
+  flex: 1;
+}
+
+.left-menu {
+  background: rgb(218, 220, 220);
+  /* フレックスボックスの利用 */
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+.logo-link {
+  display: inline-block;
+  height: auto;
+  width: auto;
+}
+
+.app-logo {
+  max-width: 150px;
+  height: auto;
+  margin-top: 20%;
+}
+
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(218, 220, 220);
+  width: 70%;
+}
+
+.code {
+  font-family: 'Fira Code', monospace;
+}
+
+.icon-container {
+  /* コピーアイコンの位置固定 */
+  position: absolute;
+  top: 20px;
+  right: 10px;
+}
+
+#copy-icon {
+  width: 42px;
+  height: auto;
+  /* 画像の色合いに効果を加える */
+  filter: invert(1) brightness(0.9);
+  /* クリック用 */
+  cursor: pointer;
+}
+
+#pen-icon {
+  width: 37px;
+  height: auto;
+  position: fixed;
+  top: 10%;
+}
+
+#trash-can-icon {
+  width: 42px;
+  height: auto;
+  position: fixed;
+  bottom: 1.25%;
+  cursor: pointer;
+}
+
+.snippet-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  width: 97%;
+  height: 4%;
+  min-height: 50px;
+  margin-top: 1.25%;
+  border-radius: 6px;
+  font-size: 24px;
+}
+
+.tags-menu {
+  display: flex;
+  /* 縦方法に中央揃え */
+  align-items: center;
+  width: 97%;
+  height: 4%;
+  line-height: 4%;
+  margin-top: 1%;
+  padding: 1%;
+  background: rgb(218, 220, 220);
+  border-radius: 6px;
+}
+
+.tags-menu li {
+  /* リスト要素を横並び */
+  display: inline;
+  background: rgb(162, 173, 173);
+  padding: 10px 50px 10px;
+}
+
+.left-right-container {
+  display: flex;
+  width: 97%;
+  height: 87%;
+  margin-top: 1%;
+}
+.left-container {
+  position: relative;
+  /* 幅の50% */
+  flex: 1;
+  margin-right: 7px;
+  padding: 16px 24px 16px;
+  background: rgb(26, 30, 34);
+  color: #fff;
+  border-radius: 6px;
+  position: relative;
+}
+.right-container {
+  /* 幅の50% */
+  flex: 1;
+  margin-left: 7px;
+  padding: 16px 24px 16px;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.right-menu {
+  background: rgb(218, 220, 220);
+}
+
+/* モーダル */
+.modal {
+  /* デフォルトで非表示 */
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* 最前面に出す */
+  z-index: 999;
+}
+
+/* モーダルダイアログを画面の真ん中に揃えるため */
+.modal-center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-dialog {
+  width: 30%;
+  height: 30%;
+  background: #fff;
+  padding: 20px;
+  /* 中央寄せ */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-buttons {
+  padding-top: 24px;
+}
+
+.modal-dialog p {
+  font-size: 28px;
+  padding-bottom: 12px;
+}
+
+.modal-buttons button {
+  margin: 0 10px;
+  padding: 10px 50px;
+  border-radius: 8px;
+  font-size: 22px;
+}
+
+#deleteYes {
+  background: #f53e3e;
+  color: #fff;
+}
+
+#deleteNo {
+  background: #f4f2f2;
+  color: #232323;
+  border: 2px solid #a9a3a3;
+}
+
+/* コピー通知 */
+.copied {
+  /* 非表示 */
+  display: none;
+  position: absolute;
+  z-index: 700;
+  top: -20px;
+  right: -32px;
+  background: rgba(255, 239, 134, 0.8);
+  padding: 4px 8px;
+  border: 1px solid #7a5c02;
+  color: #2b2b2b;
+}
