@@ -227,7 +227,7 @@ header input {
 
   header > :nth-child(3) {
     order: 2; /* 表示順を1に設定（改行して下に移動） */
-    flex-basis: calc(100%); 
+    flex-basis: calc(100%);
     margin: 4px; /* 間隔を調整 */
   }
 
@@ -359,4 +359,40 @@ header input {
 
 #filter-menu .tag:hover {
   background-color: #ababab;
+}
+
+/* トースト通知のスタイル */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-width: 90%;
+  width: 400px;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.toast.hidden {
+  display: none;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.toast-icon {
+  font-size: 20px;
+  margin-right: 10px;
 }
