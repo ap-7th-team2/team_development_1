@@ -117,7 +117,7 @@ server.mount_proc '/delete' do |req, res|
 
       # 削除成功後、トップページにリダイレクト
       res.status = 302
-      res.header['Location'] = '/?deleted=true'
+      res.header['Location'] = '/delete_complete.html'
     else
       res.status = 405
       res.body = 'Method not allowed'
