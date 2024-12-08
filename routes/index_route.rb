@@ -25,8 +25,8 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
     []
   end
 
-  # 一覧表示するスニペットを取得するメソッド
-  def self.get_snippets(limit, offset)
+  # スニペットを取得するメソッド
+  def self.get_snippets(options = {})
     client = Mysql2::Client.new(
       host: DB_HOST,
       username: DB_USER,
@@ -34,26 +34,67 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
       database: DB_NAME
     )
 
-    query = <<-SQL
-        SELECT#{' '}
-          s.id,
-          s.title,
-          s.description,
-          s.content,
-          s.created_at,
-          GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
-        FROM#{' '}
-          snippets s
-        LEFT JOIN#{' '}
-          snippet_tags st ON s.id = st.snippet_id
-        LEFT JOIN#{' '}
-          tags t ON st.tag_id = t.id
-        GROUP BY#{' '}
-          s.id, s.description, s.title, s.content, s.created_at
-        LIMIT #{limit} OFFSET #{offset};
+    # 基本のSQLクエリ
+    base_query = <<-SQL
+      SELECT 
+        s.id,
+        s.title,
+        s.description,
+        s.content,
+        s.created_at,
+        s.copy_count,
+        GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
+      FROM 
+        snippets s
+      LEFT JOIN 
+        snippet_tags st ON s.id = st.snippet_id
+      LEFT JOIN 
+        tags t ON st.tag_id = t.id
     SQL
 
-    results = client.query(query)
+    # 条件の配列を初期化
+    conditions = []
+    params = []
+
+    
+    # タグでの絞り込み
+    if options[:tags] && !options[:tags].empty?
+      conditions << "t.name = ?"
+      params << options[:tags]
+    end
+
+    # 検索キーワード
+    if options[:search] && !options[:search].empty?
+      search_condition = "(s.title LIKE ? OR s.description LIKE ? OR s.content LIKE ?)"
+      conditions << search_condition
+      search_param = "%#{options[:search]}%"
+      params += [search_param, search_param, search_param]
+    end
+
+    # 条件をクエリに追加
+    base_query += " WHERE #{conditions.join(' AND ')}" unless conditions.empty?
+
+    # グループ化
+    base_query += " GROUP BY s.id, s.description, s.title, s.content, s.created_at, s.copy_count"
+
+    # ソート
+    case options[:sort_by]
+    when 'copy_count_desc'
+      base_query += " ORDER BY s.copy_count DESC"
+    when 'copy_count_asc'
+      base_query += " ORDER BY s.copy_count ASC"
+    when 'created_at_desc'
+      base_query += " ORDER BY s.created_at DESC"
+    when 'created_at_asc'
+      base_query += " ORDER BY s.created_at ASC"
+    end
+
+    # 最初の100件を取得
+    base_query += " LIMIT 100"
+
+    # プリペアドステートメントを使用
+    statement = client.prepare(base_query)
+    results = statement.execute(*params)
 
     snippets = results.map do |row|
       {
@@ -62,7 +103,8 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
         description: row['description'],
         content: row['content'],
         tags: row['tags']&.split(', ') || [],
-        created_at: row['created_at']
+        created_at: row['created_at'],
+        copy_count: row['copy_count']
       }
     end
     client.close
@@ -76,7 +118,7 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
   def self.generate_snippets_html(snippets)
     snippets.map do |snippet|
       <<-HTML
-        <div class="snippet">
+        <div class="snippet" id = "#{snippet[:id]}">
           <h2>#{snippet[:title]}</h2>
           <p>#{snippet[:description]}</p>
           <div class="tags">Tags: #{snippet[:tags].join(', ')}</div>
@@ -86,42 +128,8 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
     end.join("\n")
   end
 
-  # データベースに次のページのデータが存在するかを確認するメソッド
-  def self.next_page?(limit, offset)
-    client = Mysql2::Client.new(
-      host: DB_HOST,
-      username: DB_USER,
-      password: DB_PASSWORD,
-      database: DB_NAME
-    )
-
-    # 次のページのデータ数を確認するクエリ
-    query = <<-SQL
-        SELECT COUNT(*) as next_page_count
-        FROM (
-          SELECT#{' '}
-            s.id
-          FROM#{' '}
-            snippets s
-          LIMIT #{limit} OFFSET #{offset + limit}
-        ) as next_page
-    SQL
-
-    result = client.query(query)
-    count = result.first['next_page_count']
-    client.close
-
-    count.positive?
-  rescue Mysql2::Error => e
-    puts "MySQL Error: #{e.message}"
-    false
-  end
-
   # ページHTMLを生成するメソッド
-  def self.generate_page_html(snippet_html, offset, limit, tags)
-    # 次のページがあるかどうかを判定
-    has_next_page = next_page?(limit, offset)
-
+  def self.generate_page_html(snippet_html, tags)
     <<~HTML
       <!DOCTYPE html>
         <html lang="ja">
@@ -143,24 +151,12 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
               <input type="text" placeholder="どんなコードを探してみる？（例：「配列 ハッシュ」「class」）">
             </div>
             <div id="create-button">
-              <a href="/snippet_add.html"><button>+ Create a new snippet</button></a>
+              <a href="/snippet_add.html"><button>+ 新しいスニペットを作成</button></a>
             </div>
           </header>
           <main id="snippet-container">
             #{snippet_html}
           </main>
-          <div id="pagination-controls">
-            <form action="/get_snippets" method="get">
-              <input type="hidden" name="offset" value="#{offset - limit}" id="previous-offset">
-              <input type="hidden" name="limit" value="#{limit}">
-              <button type="submit" #{offset.zero? ? 'disabled' : ''}>Previous</button>
-            </form>
-            <form action="/get_snippets" method="get">
-              <input type="hidden" name="offset" value="#{offset + limit}" id="next-offset">
-              <input type="hidden" name="limit" value="#{limit}">
-              <button type="submit" #{has_next_page ? '' : 'disabled'}>Next</button>
-            </form>
-          </div>
 
           <div id="filter-menu-overlay" class="hidden">
             <div id="filter-menu">
@@ -171,13 +167,13 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
               </div>
               <div>
                 <label>コピー回数</label>
-                <button>降順（DESC)</button>
-                <button>昇順（ASC)</button>
+                <button data-sort="copy_count_desc">降順（DESC)</button>
+                <button data-sort="copy_count_asc">昇順（ASC)</button>
               </div>
               <div>
                 <label>投稿日</label>
-                <button>新しい順</button>
-                <button>古い順</button>
+                <button data-sort="created_at_desc">新しい順</button>
+                <button data-sort="created_at_asc">古い順</button>
               </div>
             </div>
           </div>
