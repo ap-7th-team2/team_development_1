@@ -6,8 +6,15 @@ require "erb"
 require_relative 'routes/snippet_routes'
 require_relative 'routes/index_route'
 
+  # MySQLの接続情報
+  DB_HOST = ENV['DATABASE_HOST']
+  DB_USER = ENV['DATABASE_USER']
+  DB_PASSWORD = ENV['DATABASE_PASSWORD']
+  DB_NAME = ENV['DATABASE_NAME']
+
 # データベースからスニペット情報を取得する関数
 def fetch_snippet_from_db(snippet_id)
+
   client = Mysql2::Client.new(
     host: DB_HOST,
     username: DB_USER,
@@ -46,13 +53,21 @@ server.mount('/js', WEBrick::HTTPServlet::FileHandler, './views/js')
 
 # /get_snippetsエンドポイント
 server.mount_proc '/get_snippets' do |req, res|
-  offset = req.query['offset'].to_i || 0
-  limit = req.query['limit'].to_i || 4
+  sort_by = req.query['sort_by'] || 'created_at_desc' # デフォルト値
+  tags_filter = req.query['tags'] || nil             # タグの絞り込み条件
+  search_query = req.query['search'] || nil          # 検索キーワード
+
+  # オプションを構成
+  options = {
+    sort_by: sort_by,
+    tags: tags_filter,
+    search: search_query
+  }
   tags = IndexRoute.obtain_tags
-  snippets = IndexRoute.get_snippets(limit, offset)
+  snippets = IndexRoute.get_snippets(options) # options を渡す
   snippet_html = IndexRoute.generate_snippets_html(snippets)
   res.content_type = 'text/html'
-  res.body = IndexRoute.generate_page_html(snippet_html, offset, limit, tags)
+  res.body = IndexRoute.generate_page_html(snippet_html, tags)
 end
 
 # `/create` エンドポイントでフォームデータを処理

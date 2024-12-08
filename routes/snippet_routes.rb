@@ -34,9 +34,8 @@ module SnippetRoutes
                                    'description' => params['description'][0],
                                    'tags' => params['tags'][0]
                                  })
-        res.status = 200
-        res['Content-Type'] = 'text/html'
-        res.body = render_html("成功", "<h1>データが正常に保存されました！</h1><a href='/'>トップページに戻る</a>")
+        res.status = 302
+        res['Location'] = "/?toast_message=#{CGI.escape('新規スニペットを投稿しました')}"
       rescue StandardError => e
         handle_error(res, e.message)
       end
@@ -82,9 +81,8 @@ module SnippetRoutes
 
         SnippetForm.update_snippet(params)
 
-        res.status = 200
-        res['Content-Type'] = 'text/html'
-        res.body = render_html("更新完了", "<h1>更新が完了しました！</h1><a href='/'>トップページに戻る</a>")
+        res.status = 302
+        res['Location'] = "/?toast_message=#{CGI.escape('スニペットを更新しました')}"
       rescue StandardError => e
         handle_error(res, e.message)
       end

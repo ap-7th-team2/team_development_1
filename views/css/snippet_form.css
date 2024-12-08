@@ -49,6 +49,7 @@ li {
   margin: 0px 0px 10px 0px;
   width: 100%;
   height: 45px;
+  padding-left: 10px;
   border: none;
   outline: none;
 }
@@ -77,6 +78,7 @@ textarea {
   width: 100%;
   height: 650px;
   font-size: 30px;
+  padding: 30px;
   box-sizing: border-box;
   outline: none;
   border: none;
@@ -86,7 +88,7 @@ textarea {
 .f-form-text-code ::placeholder {
   color: #fff;
   font-size: 20px;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .f-form-text-code {
@@ -99,7 +101,7 @@ textarea {
 .f-form-text-desc ::placeholder {
   color: #000;
   font-size: 20px;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .f-form-text-desc {
@@ -116,4 +118,93 @@ textarea {
   width: 150px;
   height: 50px;
   margin: 15px 0px 0px 50px;
+  cursor: pointer;
+}
+
+.s-btn:hover {
+  background-color: rgb(9, 151, 151);
+}
+
+/* モーダルのスタイル */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-actions {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 10px;
+}
+
+.btn-submit {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-cancel {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* バリデーションのスタイル */
+.error-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-width: 90%;
+  width: 400px;
+}
+
+.hidden {
+  display: none;
+}
+
+.error-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
 }

@@ -16,8 +16,19 @@ module SnippetForm
     )
   end
 
+  # 入力データのバリデーション
+  def self.validate_snippet(params)
+    errors = []
+    errors << "タイトルは必須です" if params['title'].nil? || params['title'].strip.empty?
+    errors << "コードは必須です" if params['code'].nil? || params['code'].strip.empty?
+    errors
+  end
+
   # スニペットを保存する
   def self.save_snippet(params)
+    errors = validate_snippet(params)
+    raise StandardError, errors.join(", ") unless errors.empty?
+
     client = create_client
     begin
       # 入力データを取得してエスケープ処理
@@ -65,6 +76,9 @@ module SnippetForm
 
   # スニペットを更新する
   def self.update_snippet(params)
+    errors = validate_snippet(params)
+    raise StandardError, errors.join(", ") unless errors.empty?
+
     client = create_client
     begin
       title = client.escape(params['title'])

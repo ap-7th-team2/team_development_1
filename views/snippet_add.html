@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="jp">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,8 +10,8 @@
     <div class="page-container">
       <div class="f-container">
         <div class="logo-h1">
-          <a href="/" class="logo-a">
-            <h1>タイトルロゴ</h1>
+          <a href="/get_snippets" class="logo-a">
+            <h1>Snippet App</h1>
           </a>
         </div>
         <form action="/create" method="post" class="f-form-col">
@@ -37,5 +37,24 @@
         </form>
       </div>
     </div>
+
+    <div id="confirmation-modal" class="modal hidden">
+      <div class="modal-content">
+        <p>投稿しますか？</p>
+        <div class="modal-actions">
+          <button id="modal-submit" class="btn btn-submit">YES!</button>
+          <button id="modal-cancel" class="btn btn-cancel">NO!</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="error-container" class="error-container hidden">
+      <div class="error-message">
+        <span class="error-icon">✖</span>
+        <span id="error-text"></span>
+      </div>
+    </div>
+
+    <script type="module" src="./js/snippet_form.js" defer></script>
   </body>
 </html>
