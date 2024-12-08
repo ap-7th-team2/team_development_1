@@ -39,3 +39,25 @@ document.addEventListener('DOMContentLoaded', () => {
     form.submit();
   });
 });
+
+
+// スニペットのピー機能
+document.addEventListener('DOMContentLoaded', () => {
+
+  // 要素の取得
+  const copyIcon = document.getElementById('copy-icon');
+  const snippetContent = document.querySelector('.code').textContent;
+  const copied = document.querySelector('.copied');
+
+  // コピーアイコンをクリック
+  copyIcon.addEventListener('click', () => {
+    // クリップボードにコピー
+    navigator.clipboard.writeText(snippetContent);
+    // copiedのスタイルを表示
+    copied.style.display = 'block';
+    // 2秒後に非表示
+    setTimeout(() => {
+      copied.style.display = 'none';
+    }, 2000);
+  });
+});

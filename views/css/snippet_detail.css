@@ -57,6 +57,8 @@
   height: auto;
   /* 画像の色合いに効果を加える */
   filter: invert(1) brightness(0.9);
+  /* クリック用 */
+  cursor: pointer;
 }
 
 #pen-icon {
@@ -114,6 +116,7 @@
   margin-top: 1%;
 }
 .left-container {
+  position: relative;
   /* 幅の50% */
   flex: 1;
   margin-right: 7px;
@@ -195,4 +198,18 @@
   background: #f4f2f2;
   color: #232323;
   border: 2px solid #a9a3a3;
+}
+
+/* コピー通知 */
+.copied {
+  /* 非表示 */
+  display: none;
+  position: absolute;
+  z-index: 700;
+  top: -20px;
+  right: -32px;
+  background: rgba(255, 239, 134, 0.8);
+  padding: 4px 8px;
+  border: 1px solid #7a5c02;
+  color: #2b2b2b;
 }
