@@ -60,3 +60,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// クリップボードにコピーする関数
+// クリップボードにコピーする関数
+async function copyToClipboard(content, btn) {
+  try {
+    // Clipboard APIを使用してクリップボードにコピー
+    await navigator.clipboard.writeText(content);
+
+    // 「copied」メッセージを表示
+    const copiedMessage = btn.closest('.snippet').querySelector('.copied-message');
+    if (copiedMessage) {
+      copiedMessage.style.display = 'block';
+
+      // 2秒後に非表示にする
+      setTimeout(() => {
+        copiedMessage.style.display = 'none';
+      }, 2000);
+    }
+  } catch (error) {
+    console.error('Clipboard API failed:', error);
+    alert('Failed to copy!');
+  }
+}

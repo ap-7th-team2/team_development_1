@@ -132,6 +132,43 @@ header input::placeholder {
   background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative; /* ボタンを配置する基準 */
+}
+
+.snippet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* コピーボタン */
+.copy-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #555;
+  transition: color 0.2s ease;
+}
+
+.copy-btn:hover {
+  color: #10a98a;
+}
+
+/* コピー後のメッセージ */
+.copied-message {
+  position: absolute;
+  top: -10px;
+  left: 91%;
+  transform: translateX(-50%);
+  background: #10a98a;
+  color: white;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.2s ease;
+  display: none; /* 初期状態で非表示 */
 }
 
 .snippet:hover {
@@ -156,7 +193,6 @@ header input::placeholder {
   background-color: rgba(0, 0, 0, 0.1); /* 半透明の黒色 */
   border-radius: 2px; /* アンダーラインの角を丸くする */
 }
-
 
 .snippet h3 {
   margin: 0 0 12px;

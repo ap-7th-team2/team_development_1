@@ -1,5 +1,6 @@
 require 'mysql2'
 require 'webrick'
+require 'cgi' # HTMLエスケープのために必要
 require 'time'
 
 module IndexRoute # rubocop:disable Metrics/ModuleLength
@@ -129,17 +130,26 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
     snippets.map do |snippet|
       <<-HTML
         <div class="snippet" id="#{snippet[:id]}">
-          <h2>#{snippet[:title]}</h2>
+          <div class="snippet-header">
+            <h2>#{snippet[:title]}</h2>
+            <button class="copy-btn" onclick="copyToClipboard('#{CGI.escapeHTML(snippet[:content])}', this)">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
           <h3>#{truncate_text(snippet[:description], 50)}</h3>
-          <p>#{truncate_text(snippet[:content], 50)}</p>
+          <p>#{CGI.escapeHTML(truncate_text(snippet[:content], 50))}</p>
           <div class="tags">
-            #{snippet[:tags].map { |tag| "<span class='tag'>#{tag}</span>" }.join(' ')}
+            #{snippet[:tags].map { |tag| "<span class='tag'>#{CGI.escapeHTML(tag)}</span>" }.join(' ')}
           </div>
           <p>Created at: #{format_datetime(snippet[:created_at])}</p>
+          <div class="copied-message">copied</div>
         </div>
       HTML
     end.join("\n")
   end
+  
+  
+  
 
   # ページHTMLを生成するメソッド
   def self.generate_page_html(snippet_html, tags)
@@ -164,7 +174,7 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
               <input type="text" placeholder="どんなコードを探してみる？（例：「配列 ハッシュ」「class」）">
             </div>
             <div id="create-button">
-              <a href="/snippet_add.html"><button>+ 新しいスニペットを作成</button></a>
+              <a href="/snippet_add.html"><button>+ Create a new snippet</button></a>
             </div>
           </header>
           <main id="snippet-container">
