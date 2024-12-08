@@ -40,10 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
 // スニペットのピー機能
 document.addEventListener('DOMContentLoaded', () => {
-
   // 要素の取得
   const copyIcon = document.getElementById('copy-icon');
   const snippetContent = document.querySelector('.code').textContent;
