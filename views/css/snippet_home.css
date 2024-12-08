@@ -33,17 +33,6 @@ header {
   color: inherit;
 }
 
-#subtitle {
-  font-size: 1.5rem;
-  color: #555;
-  margin-top: 10px;
-  height: 2rem; /* アニメーションのテキスト領域の高さ */
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 #init main #start button {
   font-size: 1.5rem;
@@ -58,21 +47,4 @@ header {
 
 #init main #start button:hover {
   background-color: #0e7964;
-}
-
-.animated-text {
-  display: inline-block;
-  opacity: 0;
-  animation: fadeIn 0.1s ease-in forwards;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
