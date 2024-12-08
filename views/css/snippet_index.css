@@ -13,13 +13,13 @@ body {
   height: 100%;
   min-width: 60%;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 header {
   display: flex;
-  justify-content: space-between; 
-  align-items: flex-start; 
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 16px 32px;
   gap: 16px;
   min-width: 80%;
@@ -41,6 +41,11 @@ main {
   margin: 0px;
 }
 
+#title h1 a {
+  color: black; /* 文字色を黒に設定 */
+  text-decoration: none; /* アンダーラインを削除 */
+}
+
 #title h1 a{
   color: black;
   text-decoration: none;
@@ -51,19 +56,22 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 32px; 
-  height: 32px; 
-  background-color: transparent; 
-  color: #000; 
-  border: 2px solid #000; 
-  border-radius: 8px; 
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 8px;
   cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease; /* ボタン色の遷移 */
   transition: background-color 0.3s ease, color 0.3s ease;
   margin-right: 4px;
 }
 
 #filter-button button:hover {
-  background-color: #000; 
+  background-color: #000;
   color: #fff;
 }
 
@@ -131,6 +139,9 @@ header input::placeholder {
   height: 200px;
   background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative; /* ボタンを配置する基準 */
 }
@@ -205,7 +216,7 @@ header input::placeholder {
   color: #555;
 }
 
-.tags{
+.tags {
   margin-top: 12px;
   display: flex;
   flex-wrap: wrap;
@@ -220,6 +231,53 @@ header input::placeholder {
   color: #333;
 }
 
+#pagination-controls {
+  display: flex;
+  justify-content: center; /* 左右の要素をスペースで分ける */
+  gap: 16px; /* アイテム間の余白 */
+}
+
+#pagination-controls form button {
+  display: block;
+  margin: 24px auto;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 25px;
+  border: none;
+  background-color: #10a98a;
+  color: white;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+#pagination-controls form button:hover {
+  background-color: #0e7964;
+}
+
+#pagination-controls form button:active {
+  transform: scale(0.98);
+}
+
+#pagination-controls form button:hover:not(:disabled) {
+  background-color: #0e7964;
+}
+
+#pagination-controls form button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* 無効化状態のボタン */
+#pagination-controls form button:disabled {
+  background-color: #cccccc; /* 暗い色に設定 */
+  color: #666666; /* テキスト色も変更 */
+  cursor: not-allowed; /* 無効化を示すカーソル */
+  transform: none; /* アクティブ時の縮小を無効化 */
+}
+
+/* メディアクエリを追加 */
 /* レスポンシブ対応 */
 @media screen and (max-width: 768px) {
   header {
@@ -230,14 +288,14 @@ header input::placeholder {
     padding: 16px 16px;
   }
 
-  header > :nth-child(2){
+  header > :nth-child(2) {
     order: 1; /* 表示順を1に設定（改行して下に移動） */
     flex-basis: calc(100%);
   }
 
   header > :nth-child(3) {
     order: 2; /* 表示順を1に設定（改行して下に移動） */
-    flex-basis: calc(100%); 
+    flex-basis: calc(100%);
     margin: 4px; /* 間隔を調整 */
   }
 
