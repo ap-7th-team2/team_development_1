@@ -147,9 +147,6 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
       HTML
     end.join("\n")
   end
-  
-  
-  
 
   # ページHTMLを生成するメソッド
   def self.generate_page_html(snippet_html, tags)
