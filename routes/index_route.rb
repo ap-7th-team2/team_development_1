@@ -120,7 +120,7 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
       <<-HTML
         <div class="snippet" id = "#{snippet[:id]}">
           <h2>#{snippet[:title]}</h2>
-          <p>#{snippet[:description]}</p>
+          <h3>#{snippet[:description]}</h3>
           <div class="tags">Tags: #{snippet[:tags].join(', ')}</div>
           <p>Created at: #{snippet[:created_at]}</p>
         </div>

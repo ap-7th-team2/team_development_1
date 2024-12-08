@@ -143,6 +143,12 @@ header input {
 
 .snippet h2 {
   margin: 0 0 12px;
+  font-size: 24px;
+  color: #333;
+}
+
+.snippet h3 {
+  margin: 0 0 12px;
   font-size: 20px;
   color: #333;
 }
@@ -324,4 +330,51 @@ header input {
 
 #filter-menu .tag:hover {
   background-color: #ababab;
+}
+
+
+#init {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+#init header {
+  text-align: center;
+}
+
+#init-title h1 {
+  font-size: 3rem;
+  margin: 0;
+  color: #333;
+}
+
+#init-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#init main {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#init main #start button {
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  background-color: #10a98a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#init main #start button:hover {
+  background-color: #0e7964;
 }
