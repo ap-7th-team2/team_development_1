@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+header {
+  text-align: center;
+}
+
+#init-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#init-title h1 {
+  font-size: 3rem;
+  margin: 0;
+  color: #333;
+}
+
+#init-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+#init main #start button {
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  background-color: #10a98a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#init main #start button:hover {
+  background-color: #0e7964;
+}
+
+/* トースト通知のスタイル */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-width: 90%;
+  width: 400px;
+  opacity: 0;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.toast.hidden {
+  display: none;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.toast-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}

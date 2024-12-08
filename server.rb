@@ -1,6 +1,6 @@
 require 'webrick'
-require_relative 'routes/snippet_routes'
 require_relative 'routes/index_route'
+require_relative 'routes/snippet_routes'
 
 server = WEBrick::HTTPServer.new(Port: 8000, DocumentRoot: './views')
 server.mount('/css', WEBrick::HTTPServlet::FileHandler, './views/css')
@@ -8,13 +8,21 @@ server.mount('/js', WEBrick::HTTPServlet::FileHandler, './views/js')
 
 # /get_snippetsエンドポイント
 server.mount_proc '/get_snippets' do |req, res|
-  offset = req.query['offset'].to_i || 0
-  limit = req.query['limit'].to_i || 4
+  sort_by = req.query['sort_by'] || 'created_at_desc' # デフォルト値
+  tags_filter = req.query['tags'] || nil             # タグの絞り込み条件
+  search_query = req.query['search'] || nil          # 検索キーワード
+
+  # オプションを構成
+  options = {
+    sort_by: sort_by,
+    tags: tags_filter,
+    search: search_query
+  }
   tags = IndexRoute.obtain_tags
-  snippets = IndexRoute.get_snippets(limit, offset)
+  snippets = IndexRoute.get_snippets(options) # options を渡す
   snippet_html = IndexRoute.generate_snippets_html(snippets)
   res.content_type = 'text/html'
-  res.body = IndexRoute.generate_page_html(snippet_html, offset, limit, tags)
+  res.body = IndexRoute.generate_page_html(snippet_html, tags)
 end
 
 # `/create` エンドポイントでフォームデータを処理

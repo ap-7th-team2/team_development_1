@@ -49,6 +49,7 @@ li {
   margin: 0px 0px 10px 0px;
   width: 100%;
   height: 45px;
+  padding-left: 10px;
   border: none;
   outline: none;
 }
@@ -77,6 +78,7 @@ textarea {
   width: 100%;
   height: 650px;
   font-size: 30px;
+  padding: 30px;
   box-sizing: border-box;
   outline: none;
   border: none;
@@ -86,7 +88,7 @@ textarea {
 .f-form-text-code ::placeholder {
   color: #fff;
   font-size: 20px;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .f-form-text-code {
@@ -99,7 +101,7 @@ textarea {
 .f-form-text-desc ::placeholder {
   color: #000;
   font-size: 20px;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .f-form-text-desc {
@@ -116,6 +118,11 @@ textarea {
   width: 150px;
   height: 50px;
   margin: 15px 0px 0px 50px;
+  cursor: pointer;
+}
+
+.s-btn:hover {
+  background-color: rgb(9, 151, 151);
 }
 
 /* モーダルのスタイル */
