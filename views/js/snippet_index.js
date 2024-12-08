@@ -22,11 +22,18 @@ const showToast = (message) => {
   const toast = document.getElementById('toast-notification');
   const toastMessage = document.getElementById('toast-message');
 
+  if (!toast || !toastMessage) {
+    console.error('トースト通知用の要素が見つかりません');
+    return; // 要素が見つからない場合は処理を中断
+  }
+
   // メッセージをセット
   toastMessage.textContent = message;
 
   // トーストを表示
+  console.log('Before removing hidden:', toast.classList);
   toast.classList.remove('hidden');
+  console.log('After removing hidden:', toast.classList);
   toast.style.opacity = '1';
   toast.style.transform = 'translateX(-50%) translateY(0)';
 
@@ -40,11 +47,9 @@ const showToast = (message) => {
   }, 3000); // 3秒間表示
 };
 
-// ページ読み込み時にクエリパラメータをチェック
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const toastMessage = urlParams.get('toast_message');
-
   if (toastMessage) {
     showToast(toastMessage);
   }

@@ -199,7 +199,15 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
               </div>
             </div>
           </div>
-          <script src="js/snippet_index.js"></script>
+
+          <div id="toast-notification" class="toast hidden">
+            <div class="toast-content">
+              <span class="toast-icon">✔</span>
+              <span id="toast-message"></span>
+            </div>
+          </div>
+
+          <script src="/js/snippet_index.js"></script>
         </body>
       </html>
     HTML

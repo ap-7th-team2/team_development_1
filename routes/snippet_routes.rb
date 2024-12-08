@@ -35,7 +35,7 @@ module SnippetRoutes
                                    'tags' => params['tags'][0]
                                  })
         res.status = 302
-        res['Location'] = "/?toast_message=#{CGI.escape('新規スニペットを投稿しました')}"
+        res['Location'] = "/get_snippets?toast_message=#{CGI.escape('新規スニペットを投稿しました')}"
       rescue StandardError => e
         handle_error(res, e.message)
       end
@@ -82,7 +82,7 @@ module SnippetRoutes
         SnippetForm.update_snippet(params)
 
         res.status = 302
-        res['Location'] = "/?toast_message=#{CGI.escape('スニペットを更新しました')}"
+        res['Location'] = "/get_snippets?toast_message=#{CGI.escape('スニペットを更新しました')}"
       rescue StandardError => e
         handle_error(res, e.message)
       end
