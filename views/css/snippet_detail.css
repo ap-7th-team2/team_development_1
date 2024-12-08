@@ -134,3 +134,62 @@
 .right-menu {
   background: rgb(218, 220, 220);
 }
+
+/* モーダル */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* 最前面に出す */
+  z-index: 999;
+}
+
+/* モーダルダイアログを画面の真ん中に揃えるため */
+.modal-center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-dialog {
+  width: 30%;
+  height: 30%;
+  background: #fff;
+  padding: 20px;
+  /* 中央寄せ */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-buttons {
+  padding-top: 24px;
+}
+
+.modal-dialog p {
+  font-size: 32px;
+  padding-bottom: 12px;
+}
+
+.modal-buttons button {
+  margin: 0 10px;
+  padding: 14px 60px;
+  border-radius: 8px;
+  font-size: 22px;
+}
+
+#deleteYes {
+  background: #f53e3e;
+  color: #fff;
+}
+
+#deleteNo {
+  background: #f4f2f2;
+  color: #232323;
+  border: 2px solid #a9a3a3;
+}
