@@ -28,27 +28,27 @@ module SnippetForm
   def self.save_snippet(params)
     errors = validate_snippet(params)
     raise StandardError, errors.join(", ") unless errors.empty?
-  
+
     client = create_client
     begin
       # プレースホルダーを使ったクエリでデータを保存
       snippet_query = <<~SQL
-        INSERT INTO snippets (title, content, description) 
+        INSERT INTO snippets (title, content, description)#{' '}
         VALUES (?, ?, ?)
       SQL
-  
+
       # スニペットデータを保存しIDを取得
       statement = client.prepare(snippet_query)
       statement.execute(params['title'], params['code'], params['description'])
       snippet_id = client.last_id
-  
+
       # タグの保存処理
       save_tags(client, snippet_id, params['tags'])
     ensure
       client.close
     end
   end
-  
+
   def self.save_tags(client, snippet_id, tags)
     tag_query = <<~SQL
       INSERT INTO tags (name) VALUES (?)
@@ -57,17 +57,16 @@ module SnippetForm
     snippet_tag_query = <<~SQL
       INSERT INTO snippet_tags (snippet_id, tag_id) VALUES (?, ?)
     SQL
-  
+
     tags.split(/\s+/).each do |tag|
       tag_stmt = client.prepare(tag_query)
       tag_stmt.execute(tag)
       tag_id = client.last_id
-  
+
       snippet_tag_stmt = client.prepare(snippet_tag_query)
       snippet_tag_stmt.execute(snippet_id, tag_id)
     end
   end
-  
 
   # スニペットを取得する
   def self.get_snippet(id)
