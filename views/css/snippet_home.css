@@ -16,6 +16,12 @@ header {
   margin-bottom: 30px;
 }
 
+.app-logo {
+  max-width: 300px;
+  height: auto;
+  margin-top: 20%;
+}
+
 #init-title {
   display: flex;
   flex-direction: column;

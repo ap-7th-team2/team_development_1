@@ -28,35 +28,46 @@ module SnippetForm
   def self.save_snippet(params)
     errors = validate_snippet(params)
     raise StandardError, errors.join(", ") unless errors.empty?
-
+  
     client = create_client
     begin
-      # 入力データを取得してエスケープ処理
-      title = client.escape(params['title'])
-      code = client.escape(params['code'])
-      description = client.escape(params['description'])
-      tags = params['tags'].split(/\s+/).map { |tag| client.escape(tag) }
-
-      # snippetsテーブルにデータを保存
-      client.query("INSERT INTO snippets (title, content, description) VALUES ('#{title}', '#{code}', '#{description}')")
+      # プレースホルダーを使ったクエリでデータを保存
+      snippet_query = <<~SQL
+        INSERT INTO snippets (title, content, description) 
+        VALUES (?, ?, ?)
+      SQL
+  
+      # スニペットデータを保存しIDを取得
+      statement = client.prepare(snippet_query)
+      statement.execute(params['title'], params['code'], params['description'])
       snippet_id = client.last_id
-
-      # tagsテーブルとsnippet_tagsテーブルにデータを保存
-      tags.each do |tag|
-        tag_result = client.query("SELECT id FROM tags WHERE name = '#{tag}' LIMIT 1")
-        tag_id = tag_result.first ? tag_result.first['id'] : nil
-
-        unless tag_id
-          client.query("INSERT INTO tags (name) VALUES ('#{tag}')")
-          tag_id = client.last_id
-        end
-
-        client.query("INSERT INTO snippet_tags (snippet_id, tag_id) VALUES (#{snippet_id}, #{tag_id})")
-      end
+  
+      # タグの保存処理
+      save_tags(client, snippet_id, params['tags'])
     ensure
       client.close
     end
   end
+  
+  def self.save_tags(client, snippet_id, tags)
+    tag_query = <<~SQL
+      INSERT INTO tags (name) VALUES (?)
+      ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)
+    SQL
+    snippet_tag_query = <<~SQL
+      INSERT INTO snippet_tags (snippet_id, tag_id) VALUES (?, ?)
+    SQL
+  
+    tags.split(/\s+/).each do |tag|
+      tag_stmt = client.prepare(tag_query)
+      tag_stmt.execute(tag)
+      tag_id = client.last_id
+  
+      snippet_tag_stmt = client.prepare(snippet_tag_query)
+      snippet_tag_stmt.execute(snippet_id, tag_id)
+    end
+  end
+  
 
   # スニペットを取得する
   def self.get_snippet(id)
