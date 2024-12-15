@@ -1,6 +1,7 @@
 /* スニペットの詳細ページ */
 @charset "utf-8";
 
+
 .container {
   /* フレックスボックスの利用 */
   display: flex;

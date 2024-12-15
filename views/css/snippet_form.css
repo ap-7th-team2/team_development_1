@@ -4,6 +4,20 @@ body {
   margin: 0;
 }
 
+ /* タイトルロゴ */
+ .logo-link {
+  display: inline-block;
+  height: auto;
+  width: auto;
+}
+
+.app-logo {
+  max-width: 150px;
+  height: auto;
+  margin-top:15px;
+  margin-right: 10px;
+}
+
 h1 {
   margin-top: 0;
   color: #000;
@@ -110,7 +124,7 @@ textarea {
 }
 
 .s-btn {
-  background-color: teal;
+  background-color: #10a98a;;
   color: #fff;
   font-size: 25px;
   border: none;
@@ -122,7 +136,7 @@ textarea {
 }
 
 .s-btn:hover {
-  background-color: rgb(9, 151, 151);
+  background-color: #0e7964;
 }
 
 /* モーダルのスタイル */

@@ -30,6 +30,17 @@ main {
 }
 
  /* タイトルロゴ */
+ .logo-link {
+  display: inline-block;
+  height: auto;
+  width: auto;
+}
+
+.app-logo {
+  max-width: 150px;
+  height: auto;
+}
+
 #title {
   margin: 0;
   padding: 0;
@@ -136,7 +147,7 @@ header input::placeholder {
   cursor: pointer;
   border: 1px solid #ddd;
   padding: 24px;
-  height: 200px;
+  min-height: 240px;
   background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   transition:

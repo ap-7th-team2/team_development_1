@@ -164,7 +164,9 @@ module IndexRoute # rubocop:disable Metrics/ModuleLength
         </head>
         <body>
           <header>
-            <div id="title"><h1><a href = "/">Snippet App</a></h1></div>
+            <div class="logo-container">
+              <a class="logo-link" href="/get_snippets"><img class="app-logo" src="/images/snippet-app-logo.png" alt="スニペットアプリのロゴ"></a>
+            </div>
             <div id="filter-button">
               <button><i class="fas fa-sliders-h"></i></button>
             </div>
